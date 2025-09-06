@@ -4,14 +4,15 @@ import posthog from "posthog-js";
 import { PostHogProvider as PHProvider, usePostHog } from "posthog-js/react";
 import { Suspense, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
+import { siteConfig } from '@/config/site'
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
-      api_host: 'https://www.yashbhardwaj.com/ingest',
+      api_host: siteConfig.posthog.apiHost,
       ui_host: 'https://us.posthog.com',
-      capture_pageview: false, // We capture pageviews manually
-      capture_pageleave: true, // Enable pageleave capture
+      capture_pageview: false,
+      capture_pageleave: true,
     });
   }, []);
 

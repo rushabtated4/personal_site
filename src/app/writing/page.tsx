@@ -2,20 +2,23 @@ import Link from 'next/link'
 import { ChevronLeft } from 'lucide-react'
 import { getAllPosts } from '@/lib/mdx'
 import { Metadata } from 'next'
+import { siteConfig } from '@/config/site'
 
 export const metadata: Metadata = {
-  title: 'Writing | Yash Bhardwaj',
-  description: 'Thoughts on technology, business, and life',
+  title: `Writing | ${siteConfig.name}`,
+  description: siteConfig.description,
   openGraph: {
-    title: 'Writing | Yash Bhardwaj',
-    description: 'Thoughts on technology, business, and life',
+    title: `Writing | ${siteConfig.name}`,
+    description: siteConfig.description,
     images: ['/api/og'],
+    siteName: siteConfig.name,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Writing | Yash Bhardwaj',
-    description: 'Thoughts on technology, business, and life',
+    title: `Writing | ${siteConfig.name}`,
+    description: siteConfig.description,
     images: ['/api/og'],
+    creator: siteConfig.social.xHandle,
   },
 }
 

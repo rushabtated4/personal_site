@@ -3,6 +3,7 @@ import { Header } from '@/components/Header'
 import { PostHogProvider } from '@/components/PostHogProvider'
 import './globals.css'
 import { Metadata } from 'next'
+import { buildBaseMetadata } from '@/lib/seo'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -11,36 +12,7 @@ const inter = Inter({
   weight: ['400', '500', '600'],
 })
 
-export const metadata: Metadata = {
-  title: "Yash Bhardwaj",
-  description: "Building fun things on the internet",
-  metadataBase: new URL('https://yashbhardwaj.com'),
-  icons: {
-    icon: '/favicon.ico?v=1',
-    apple: '/apple-touch-icon.png?v=1',
-    shortcut: '/favicon-16x16.png?v=1',
-  },
-  manifest: '/site.webmanifest',
-  openGraph: {
-    type: 'website',
-    url: 'https://yashbhardwaj.com',
-    title: "Yash Bhardwaj",
-    description: "Building fun things on the internet",
-    siteName: 'Yash Bhardwaj',
-    images: ["https://yashbhardwaj.com/og-image.png"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Yash Bhardwaj",
-    description: "Building fun things on the internet",
-    images: ["https://yashbhardwaj.com/og-image.png"],
-    creator: '@ybhrdwj',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+export const metadata: Metadata = buildBaseMetadata()
 
 export const viewport = {
   width: 'device-width',

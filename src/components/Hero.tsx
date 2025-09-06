@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { LinkText } from './LinkText'
 import { Mail, Github, Instagram } from 'lucide-react'
+import { siteConfig } from '@/config/site'
 import { useState, useEffect } from 'react'
 
 export function Hero() {
@@ -12,12 +13,12 @@ export function Hero() {
 
   const handleEmailClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    navigator.clipboard.writeText('yb@yashbhardwaj.com')
+    navigator.clipboard.writeText(siteConfig.social.email)
     setShowCopied(true)
     setTimeout(() => setShowCopied(false), 2000)
   }
 
-  const birthDate = new Date('1998-08-19')
+  const birthDate = new Date(siteConfig.person.birthdateISO)
 
   useEffect(() => {
     const calculateAge = () => {
@@ -31,7 +32,7 @@ export function Hero() {
     }
 
     const calculateDecimalAge = () => {
-      const birthTime = new Date('1998-08-19T00:00:00').getTime()
+      const birthTime = new Date(`${siteConfig.person.birthdateISO}T00:00:00`).getTime()
       const currentTime = new Date().getTime()
       const ageInMilliseconds = currentTime - birthTime
       const ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25)
@@ -60,17 +61,16 @@ export function Hero() {
           {/* Welcome paragraph - 75% width */}
           <div className="w-3/4">
             <p className="text-base text-gray-600">
-              Hello! I&apos;m Yash and you&apos;re currently exploring my tiny 
-              corner of the internet. I use this space to project my ideas 
-              and express my obsessions.
+              Hello! I&apos;m {siteConfig.name}. An Architect by profession and Tinkerer by passion.
+              Currently exploring in the niche of Mental Health and Post AI world
             </p>
           </div>
           
           {/* Image - 25% width */}
           <div className="w-1/4 aspect-square relative">
             <Image
-              src="/yb-hero.jpg"
-              alt="Yash Bhardwaj"
+              src={siteConfig.images.hero}
+              alt={siteConfig.name}
               fill
               className="rounded-lg object-cover"
               priority
@@ -148,7 +148,7 @@ export function Hero() {
                     </div>
                   )}
                 </span>{' '}
-                years old, based in Bombay
+                years old, based in {siteConfig.person.city}
               </li>
               <li>
                 I built the first meme page network in India to 16M followers{' '}
@@ -177,7 +177,7 @@ export function Hero() {
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-4 w-full">
               <a 
-                href="mailto:yb@yashbhardwaj.com" 
+                href={`mailto:${siteConfig.social.email}`} 
                 onClick={handleEmailClick}
                 className="group relative text-gray-400 hover:text-gray-600"
               >
@@ -189,7 +189,7 @@ export function Hero() {
                 )}
               </a>
               <a 
-                href="https://x.com/ybhrdwj" 
+                href={siteConfig.social.xUrl} 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-gray-600"
@@ -203,7 +203,7 @@ export function Hero() {
                 />
               </a>
               <a 
-                href="https://instagram.com/ybhrdwj" 
+                href={siteConfig.social.instagramUrl} 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-gray-600"
@@ -211,7 +211,7 @@ export function Hero() {
                 <Instagram className="h-5 w-5" />
               </a>
               <a 
-                href="https://github.com/ybhrdwj" 
+                href={siteConfig.social.githubUrl} 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-gray-600"
@@ -256,7 +256,7 @@ export function Hero() {
       <div className="hidden md:block md:col-span-7 space-y-12">
         {/* Welcome paragraph */}
         <p className="text-base text-gray-600">
-          Hello! I&apos;m Yash and you&apos;re currently exploring my tiny <br />
+          Hello! I&apos;m {siteConfig.name} and you&apos;re currently exploring my tiny <br />
           corner of the internet. I use this space to project my ideas <br />
           and express my obsessions.
         </p>
@@ -329,7 +329,7 @@ export function Hero() {
                   </div>
                 )}
               </span>{' '}
-              years old, based in Bombay
+              years old, based in {siteConfig.person.city}
             </li>
             <li>
               I built the first meme page network in India to 16M followers{' '}
@@ -358,7 +358,7 @@ export function Hero() {
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-4">
             <a 
-              href="mailto:yb@yashbhardwaj.com" 
+              href={`mailto:${siteConfig.social.email}`} 
               onClick={handleEmailClick}
               className="group relative text-gray-400 hover:text-gray-600"
             >
@@ -370,7 +370,7 @@ export function Hero() {
               )}
             </a>
             <a 
-              href="https://x.com/ybhrdwj" 
+              href={siteConfig.social.xUrl} 
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-gray-600"
@@ -384,7 +384,7 @@ export function Hero() {
               />
             </a>
             <a 
-              href="https://instagram.com/ybhrdwj" 
+              href={siteConfig.social.instagramUrl} 
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-gray-600"
@@ -392,7 +392,7 @@ export function Hero() {
               <Instagram className="h-5 w-5" />
             </a>
             <a 
-              href="https://github.com/ybhrdwj" 
+              href={siteConfig.social.githubUrl} 
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-gray-600"
@@ -432,8 +432,8 @@ export function Hero() {
       {/* Desktop Image - 3 columns */}
       <div className="hidden md:block md:col-span-3">
         <Image
-          src="/yb-hero.jpg"
-          alt="Yash Bhardwaj"
+          src={siteConfig.images.hero}
+          alt={siteConfig.name}
           width={400}
           height={400}
           className="rounded-lg"

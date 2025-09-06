@@ -6,6 +6,7 @@ import { Clock } from './Clock'
 import { Weather } from './Weather'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import { siteConfig } from '@/config/site'
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -25,7 +26,7 @@ export function Header() {
           <div className="col-span-10 flex h-[42px] items-center justify-between px-4 md:px-0">
             {/* Left side: Name */}
             <Link href="/" className="text-sm text-gray-900">
-              Yash Bhardwaj
+              {siteConfig.name}
             </Link>
 
             {/* Right side: Navigation, Weather, and Menu */}

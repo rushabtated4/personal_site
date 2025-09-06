@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { Sun, Cloud, CloudRain, CloudSnow, CloudLightning, Cloudy } from 'lucide-react'
+import { siteConfig } from '@/config/site'
 
 type WeatherData = {
   temp: string
@@ -31,16 +32,16 @@ const WEATHER_ICONS = {
 export function Weather() {
   const [weather, setWeather] = useState<WeatherData>({ 
     temp: '', 
-    location: 'Mumbai',
+    location: siteConfig.person.city,
     icon: '01d'
   })
 
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        // Mumbai coordinates
-        const lat = 19.0760
-        const lon = 72.8777
+        // Coordinates from config
+        const lat = siteConfig.person.location.lat
+        const lon = siteConfig.person.location.lon
         
         const response = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY}`
@@ -54,7 +55,7 @@ export function Weather() {
         
         setWeather({
           temp: `${Math.round(data.main.temp)}°C`,
-          location: 'Mumbai',
+          location: siteConfig.person.city,
           icon: data.weather[0].icon
         })
       } catch (error) {
@@ -62,7 +63,7 @@ export function Weather() {
         // Fallback to default values on error
         setWeather({
           temp: '28°C',
-          location: 'Mumbai',
+          location: siteConfig.person.city,
           icon: '01d'
         })
       }
@@ -81,7 +82,7 @@ export function Weather() {
 
   return (
     <div className="flex items-center gap-2 text-gray-400">
-      <span>{weather.location}<span className="hidden md:inline">, IN</span></span>
+      <span>{weather.location}<span className="hidden md:inline">, {siteConfig.person.countryCode}</span></span>
       <WeatherIcon className="h-4 w-4" />
       <span>{weather.temp}</span>
     </div>

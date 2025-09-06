@@ -6,6 +6,9 @@ import { getPostBySlug } from '@/lib/mdx'
 import { formatDate } from '@/lib/formatDate'
 import { MDXContent } from '@/components/MDXContent'
 import { Metadata } from 'next'
+import { buildPostMetadata } from '@/lib/seo'
+import { siteConfig } from '@/config/site'
+import { getAbsoluteUrl } from '@/lib/url'
 
 export async function generateMetadata({
   params,
@@ -17,48 +20,12 @@ export async function generateMetadata({
   
   if (!post) {
     return {
-      title: 'Post Not Found | Yash Bhardwaj',
+      title: `Post Not Found | ${siteConfig.name}`,
       description: 'The requested post could not be found.',
     }
   }
 
-  const ogUrl = `/api/og?slug=${slug}&title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(post.category)}&date=${encodeURIComponent(post.date)}`
-
-  return {
-    title: `${post.title} | Yash Bhardwaj`,
-    description: post.description || post.title,
-    openGraph: {
-      type: 'article',
-      title: post.title,
-      description: post.description || post.title,
-      url: `https://yashbhardwaj.com/writing/${slug}`,
-      images: [
-        {
-          url: ogUrl,
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        }
-      ],
-      siteName: 'Yash Bhardwaj',
-      publishedTime: post.date,
-      authors: ['Yash Bhardwaj'],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description: post.description || post.title,
-      creator: '@ybhrdwj',
-      images: [
-        {
-          url: ogUrl,
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        }
-      ],
-    },
-  }
+  return buildPostMetadata({ slug, title: post.title, description: post.description, date: post.date, category: post.category })
 }
 
 export default async function Post({
@@ -108,17 +75,17 @@ export default async function Post({
           <div className="mb-8 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Image
-                src="/logos/yb.jpg"
-                alt="Yash Bhardwaj"
+                src={siteConfig.images.avatar}
+                alt={siteConfig.name}
                 width={24}
                 height={24}
                 className="rounded-full"
               />
-              <span className="text-sm text-gray-600">by Yash Bhardwaj</span>
+              <span className="text-sm text-gray-600">by {siteConfig.name}</span>
             </div>
             <a 
               href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                `Just finished reading — ${post.title} by @ybhrdwj\n\nhttps://yashbhardwaj.com/writing/${slug}`
+                `Just finished reading — ${post.title} by ${siteConfig.social.xHandle}\n\n${getAbsoluteUrl(`/writing/${slug}`)}`
               )}`}
               target="_blank"
               rel="noopener noreferrer"
