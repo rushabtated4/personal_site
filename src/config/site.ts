@@ -38,13 +38,13 @@ export const siteConfig: SiteConfig = {
   },
   social: {
     xHandle: '@ybhrdwj',
-    xUrl: 'https://x.com/ybhrdwj',
-    instagramUrl: 'https://instagram.com/ybhrdwj',
-    githubUrl: 'https://github.com/ybhrdwj',
+    xUrl: 'https://x.com/rushabtated4',
+    instagramUrl: 'https://instagram.com/rushabtated4',
+    githubUrl: 'https://github.com/rushabtated4',
     email: 'rushabtated4@gmail.com',
   },
   person: {
-    birthdateISO: '1998-08-19',
+    birthdateISO: '2000-06-09',
     city: 'Mumbai',
     countryCode: 'IN',
     location: { lat: 19.076, lon: 72.8777 },
@@ -53,5 +53,6 @@ export const siteConfig: SiteConfig = {
     apiHost: '/ingest',
   },
 }
+
 
 

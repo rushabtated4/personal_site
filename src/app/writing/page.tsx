@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ChevronLeft } from 'lucide-react'
-import { getAllPosts } from '@/lib/mdx'
+import blogData from '@/data/blog.json'
 import { Metadata } from 'next'
 import { siteConfig } from '@/config/site'
 
@@ -23,8 +23,6 @@ export const metadata: Metadata = {
 }
 
 export default async function WritingPage() {
-  const posts = await getAllPosts()
-  
   return (
     <div className="mx-auto w-full max-w-[1084px]">
       <div className="md:grid md:grid-cols-12 md:gap-5">
@@ -44,7 +42,7 @@ export default async function WritingPage() {
           <h1 className="text-3xl font-semibold mb-12">Writing</h1>
           
           <div className="space-y-4">
-            {posts.map((post) => (
+            {blogData.posts.map((post) => (
               <div key={post.slug} className="group">
                 <div className="grid grid-cols-[80px_1fr] sm:grid-cols-[100px_1fr_auto] items-baseline gap-2">
                   <span className="text-sm text-gray-400">{post.date}</span>

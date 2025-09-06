@@ -1,15 +1,13 @@
 import Link from 'next/link'
-import { getAllPosts } from '@/lib/mdx'
+import blogData from '@/data/blog.json'
 
 export async function Blog() {
-  const posts = await getAllPosts()
-  
   return (
     <div className="space-y-4 pb-8 md:pb-0">
-      <h2 className="text-sm font-medium uppercase text-gray-400">WRITING</h2>
+      <h2 className="text-sm font-medium uppercase text-gray-400">{blogData.title}</h2>
       
       <div className="space-y-4">
-        {posts.slice(0, 8).map((post) => (
+        {blogData.posts.slice(0, 8).map((post) => (
           <div key={post.slug} className="group">
             <Link 
               href={`/writing/${post.slug}`}
